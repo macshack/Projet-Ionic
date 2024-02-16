@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { FilmNewPageRoutingModule } from './film-new-routing.module';
+import { MangasListPageRoutingModule } from './mangas-list-routing.module';
 
-import { FilmNewPage } from './film-new.page';
+import { MangasListPage } from './mangas-list.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    FilmNewPageRoutingModule
+    MangasListPageRoutingModule,
   ],
-  declarations: [FilmNewPage]
+  declarations: [MangasListPage],
 })
-export class FilmNewPageModule {}
+export class MangasListPageModule {}

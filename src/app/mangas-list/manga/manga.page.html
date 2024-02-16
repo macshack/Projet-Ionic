@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/mangas"></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="manga">{{ manga.title }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-button (click)="setModif()">Rendre Modifiable</ion-button>
+  <div *ngIf="!modif">
+    <ion-grid *ngIf="manga">
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="onDelete(manga.id)">
+            <ion-icon name="trash"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <img [src]="manga.keyart" [alt]="manga.title" />
+        </ion-col>
+        <ion-col>
+          <strong>Title</strong><br />
+          {{manga.title}} <br />
+          <strong>Date</strong><br />
+          {{manga.releaseDate}} <br />
+          <strong>Mangaka</strong><br />
+          {{manga.mangaka}} <br />
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <strong>Résumé</strong> <br />
+          <p>{{manga.synopsis}}</p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <div *ngIf="modif">
+    <ion-item>
+      <ion-input
+        type="text"
+        label="Affiche"
+        [(ngModel)]="manga.keyart"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input
+        type="text"
+        label="Titre"
+        [(ngModel)]="manga.title"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input
+        type="text"
+        label="Date"
+        [(ngModel)]="manga.releaseDate"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input
+        type="text"
+        label="Mangaka"
+        [(ngModel)]="manga.mangaka"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-textarea
+        label="Synopsis"
+        rows="20"
+        [(ngModel)]="manga.synopsis"
+      ></ion-textarea>
+    </ion-item>
+    <p class="text-center">
+      <ion-button (click)="onModif()">Modifier</ion-button>
+    </p>
+  </div>
+</ion-content>

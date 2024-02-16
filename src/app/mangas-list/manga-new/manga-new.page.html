@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Nouveau Manga</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-item>
+    <ion-input
+      type="text"
+      label="Affiche"
+      [(ngModel)]="manga.keyart"
+    ></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-input type="text" label="Titre" [(ngModel)]="manga.title"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-input
+      type="text"
+      label="Mangaka"
+      [(ngModel)]="manga.mangaka"
+    ></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-input
+      type="text"
+      label="Date"
+      [(ngModel)]="manga.releaseDate"
+    ></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-textarea
+      label="Synopsis"
+      rows="20"
+      [(ngModel)]="manga.synopsis"
+    ></ion-textarea>
+  </ion-item>
+  <p class="text-center">
+    <ion-button (click)="add()">Envoyer</ion-button>
+  </p>
+</ion-content>

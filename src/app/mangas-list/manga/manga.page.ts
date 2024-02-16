@@ -1,47 +1,50 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
-import { FilmService } from 'src/app/film.service';
-import { Film } from 'src/app/models/film.model';
+import { MangaService } from 'src/app/manga.service';
+import { Manga } from 'src/app/models/manga.model';
 
 @Component({
-  selector: 'app-film',
-  templateUrl: './film.page.html',
-  styleUrls: ['./film.page.scss'],
+  selector: 'app-manga',
+  templateUrl: './manga.page.html',
+  styleUrls: ['./manga.page.scss'],
 })
-export class FilmPage implements OnInit {
+export class MangaPage implements OnInit {
   modif: boolean = false;
-  film!: Film;
+  manga!: Manga;
 
   constructor(
-    private alertCtrl : AlertController,
+    private alertCtrl: AlertController,
     private route: ActivatedRoute,
-    private Film: FilmService,
+    private mangaService: MangaService,
     private toastCtrl: ToastController,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
-    this.Film.get(id).subscribe((value: any) => {
-      this.film = value;
+    this.mangaService.get(id).subscribe((value: any) => {
+      this.manga = value;
     });
   }
 
   async setModif() {
-    if(!this.modif) {
+    if (!this.modif) {
       const alert = await this.alertCtrl.create({
-        header : 'Etes vous sur de vouloir modifier ?',
+        header: 'Etes vous sur de vouloir modifier ?',
         subHeader: 'Vous rendrez possible la modification',
-        buttons : [
+        buttons: [
           {
             text: 'Annuler',
-            role: 'Cancel'
-          }, {
+            role: 'Cancel',
+          },
+          {
             text: 'Configurer',
-            handler: () => {this.modif = !this.modif}
-          }
-        ]
+            handler: () => {
+              this.modif = !this.modif;
+            },
+          },
+        ],
       });
       await alert.present();
     } else {
@@ -52,20 +55,20 @@ export class FilmPage implements OnInit {
   async presentToast() {
     const toast = this.toastCtrl.create({
       message: 'Vos modifications sont enregistrées',
-      duration: 2000
+      duration: 2000,
     });
     (await toast).present();
   }
 
   onModif() {
-    this.Film.update(this.film).subscribe(() => {
+    this.mangaService.update(this.manga).subscribe(() => {
       this.presentToast();
       this.modif = false;
     });
   }
 
   onDelete(id: any) {
-    this.Film.delete(id);
-    this.router.navigate(['/films']);
+    this.mangaService.delete(id);
+    this.router.navigate(['/mangas']);
   }
 }
